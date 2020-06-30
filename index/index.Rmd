@@ -1,0 +1,147 @@
+---
+title: Autorização de Obras
+subtitle: em imóveis da União
+author: Luiz Fernando Palin Droubi
+date: \today
+institute: Superintendênia do Patrimônio da União em Santa Catarina
+output: 
+  binb::metropolis:
+    citation_package: biblatex
+    keep_tex: yes
+bibliography: citations.bib
+biblio-style: abnt
+fontsize: 9pt
+toc: true
+header-includes:
+  - \usepackage[brazil]{babel}
+  - \usepackage{csquotes}
+#  - \usepackage{enumitem}
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+# Previsão Legal
+
+>- \alert<1>{A necessidade de Autorização de Obras em imóveis da União está
+prevista no artigo 6º do DECRETO-LEI Nº 2.398\footcite{brasil_dl_1987}, DE 21 DE
+DEZEMBRO DE 1987, cuja redação final foi dada pela LEI Nº
+13.139\footcite{brasil_l13139}, DE 26 DE JUNHO DE 2015}
+
+>- \alert<2>{\emph{Art. 6º Considera-se infração administrativa contra o
+patrimônio da União toda ação ou omissão que viole o adequado uso, gozo,
+disposição, proteção, manutenção e conservação dos imóveis da União.}}
+
+>- \alert<3>{\emph{§ 1º Incorre em infração administrativa aquele que realizar
+aterro, construção, obra, cercas ou outras benfeitorias, desmatar ou instalar
+equipamentos, sem prévia autorização ou em desacordo com aquela concedida, em
+bens de uso comum do povo, especiais ou dominiais, com destinação específica
+fixada por lei ou ato administrativo.}}
+
+# Atuação da SPU
+
+>- \alert<1>{A atuação da SPU está prevista no §7º do art. 6º}
+
+>- \alert<2>{\emph{§ 7º Verificada a ocorrência de infração, a
+\textbf{Secretaria do Patrimônio da União} do Ministério do Planejamento,
+Orçamento e Gestão aplicará multa e notificará o embargo da obra, quando
+cabível, intimando o responsável para, no prazo de 30 (trinta) dias, comprovar a
+regularidade da obra ou promover sua regularização.}}
+
+>- \alert<3>{Está prevista a aplicação do instrumento judicial de reintegração 
+de posse, em caso de descumprimento}
+
+>- \alert<4>{\emph{§ 11.  Após a notificação para desocupar o imóvel, a
+\textbf{Superintendência do Patrimônio da União} verificará o atendimento da
+notificação e, em caso de desatendimento, ingressará com pedido judicial de
+\textbf{reintegração de posse} no prazo de 60 (sessenta) dias.}}
+
+## Sanções previstas
+
+>- \alert<1>{O artigo 6º do DL  prevê a aplicação das seguintes sanções:}
+
+>- \alert<2>{§ 4º Sem prejuízo da responsabilidade civil, as infrações previstas 
+neste artigo serão punidas com as seguintes sanções:}
+
+>- \alert<3>{I - embargo de obra, serviço ou atividade, até a manifestação da 
+União quanto à regularidade de ocupação;} 
+
+>- \alert<4>{II - aplicação de multa;}
+
+>- \alert<5>{III - desocupação do imóvel; e}
+
+>- \alert<6>{IV - demolição e/ou remoção do aterro, construção, obra, cercas ou 
+demais benfeitorias, bem como dos equipamentos instalados, à conta de quem os 
+houver efetuado, caso não sejam passíveis de regularização.}
+
+# Competência
+
+>- \alert<1>{A competência para a Autorização de Obras em imóveis da União foi
+delegada aos Superintendentes Estaduais do Patrimônio da União pela Portaria
+83\footcite{portaria-83}:}
+
+>- \alert<2>{\emph{Art. 15. Fica subdelegada competência aos Superintendentes do
+Patrimônio da União, observadas as disposições legais e regulamentares, para
+autorizar, mediante as condições constantes do Anexo I:}}
+
+>- \alert<3>{\emph{(...)}}
+
+>- \alert<4>{\emph{VI - autorização de obra em áreas de uso comum do povo de
+domínio da União, quando a intervenção a ser realizada não alterar essa
+característica e for dispensada posterior cessão;}}
+
+>- \alert<5>{Ver também anexo X da Portaria 11\footcite{portaria-11}, de 31 de Janeiro de 2018}
+
+# Análise Técnica
+
+\begin{itemize}[<+- | alert@+>]
+  \item a) Nome do requerente.
+  \item b) Em que consiste a Obra (Apresentação e Descrição).
+  \item c) Finalidade da Obra.
+  \item d) Tamanho da área da Obra em $\mathrm{m}^2$
+  \item e) Endereço completo do local da Obra. 
+  \item f) Se a Obra acresce ou diminui terreno da União ou se faz movimentação de terra ou areia.
+  \item g) Nome e telefone do responsável pelas informações da Obra junto à SPU/SC. 
+  \item h) Informar a previsão para inicio e conclusão das obras.
+\end{itemize}
+
+## Documentação
+
+\begin{itemize}[<+- | alert@+>]
+  \item Projeto Básico da Obra e Memorial da área abrangida.
+  \item Demonstrativo de Viabilidade Econômica;
+  \item Parecer da Capitania dos Portos;
+  \item Licença Ambiental;
+  \item Relatório Fotográfico;
+  \item Memorial Descritivo sobre benfeitorias;
+  \item Declaração de Comunidades Tradicionais;
+  \item Declaração de Unidades de Conservação;
+  \item Declaração de Responsabilidade pela Manutenção.
+\end{itemize}
+
+# Exemplo
+
+>- \alert<1>{10154.110758/2019-73, Portaria 13.399, de 02 de Junho de 2020}
+>- \alert<2>{\emph{\textbf{O SUPERINTENDENTE DO PATRIMÔNIO DA UNIÃO EM SANTA
+CATARINA, DO MINISTÉRIO DA ECONOMIA}, no uso da competência que lhe foi
+subdelegada pelo art. 15, inc. VI, da Portaria nº 83, de 28 de agosto de 2019,
+c/c o art. 68 Anexo X, da Portaria nº 11, de 31 de janeiro de 2018 - MPDG, e
+tendo em vista o disposto no art. 6º, do Decreto-Lei nº 2.398, de 21 de dezembro
+de 1987, com a nova redação que lhe foi conferida pela Lei nº 13.139, de 26 de
+junho de 2015, e de acordo com os elementos que integram o Processo nº
+10154.110758/2019-73,}}
+
+>- \alert<3>{\emph{\textbf{RESOLVE:}}}
+
+>- \alert<4>{\emph{Art. 1º - Autorizar a interessada, Interligação Elétrica
+Biguaçu S.A. (CNPJ: 28.218.051/0001-03), a realizar a execução de obras
+referentes à instalação de linhas de transmissão sub-aquáticas entre Biguaçu e
+Florianópolis (baía norte), em águas da União, na forma dos elementos constantes
+do processo nº 10154.110758/2019-73;}}
+
+>- \alert<5>{\emph{(...)}}
+
+## Conclusão
+
+\Huge\center \textbf{\textsc{Obrigado!}}
