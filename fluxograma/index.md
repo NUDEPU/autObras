@@ -1,3 +1,6 @@
+Fluxograma
+-----
+
 ```mermaid
 graph TD
   A[Abertura do Requerimento <br>] -->|Triagem| B(SPU-SC-NUDEPU)
@@ -6,3 +9,5 @@ graph TD
   C -->|Incompleta| E[Notificar p/ <br> complementação]
   C -->|Não é área da União| F[Devolver]
 ```
+
+[Fluxograma](fluxogramaAutObras.pdf)
