@@ -1,6 +1,6 @@
 Fluxograma
 -----
 
-![](flowchart.svg)
+<img src="./flowchart.svg">
 
 [Fluxograma](fluxogramaAutObras.pdf)
