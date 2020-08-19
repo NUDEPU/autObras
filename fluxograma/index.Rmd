@@ -7,15 +7,145 @@ output: html_document
 library(DiagrammeR)
 ```
 
-```{r, echo = TRUE}
+### Caso 1: Requerimento com documentação completa
+
+```{r, echo = FALSE}
 DiagrammeR("
 graph LR
-  id1(Interessado) -->|Abre ou <br> complementa| A[SPUNet]
-  A -->|Triagem| B(SPU-SC-NUDEPU)
-  B --> C{Caracterização <br> da Área}
+  id1(Interessado) ==>|Abre ou <br> complementa| A[SPUNet]
+  A ==>|Triagem| B(SPU-SC-NUDEPU)
+  B ==> C{Caracterização <br> da Área}
+  C ==>|Área da <br> União| T[SPUViz]
+  T ==> D{Análise Técnica<br>Checklist}
+  C -->|Alodial| N(SPU-SC-NUGES)
+  T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  T -->|Mudança de <br> Natureza| R[SPU-UC]
+  R -->|Encaminhar <br> como cessão!| B
+  R --> J
+  D ==>|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
+  D -->|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
+  M -->|Tramita| N
+  N -->|Informa| id1
+  N -->|Cancela| A
+  A -->|Fim de prazo| N
+  N -->|Fim de prazo| P(SPU-SC-NUFIS)
+  P -->|Infração| Q[Autuação]
+  P -->|Sem infração| F
+  Q --> F
+  E ==>|Para Análise <br> Jurídica| I{CJU/SC}
+  I ==>|Parecer <br> Favorável| J[Portaria]
+  J ==>|Assinatura <br> Superintendente <br> ou Secretário| K[SPU-DEDES]
+  I -->|Parecer <br> Desfavorável| D
+  K ==>|DOU| N
+  N ==> L[FIGEST]
+  L ==> F[FIM!]
+  class B,N,P,S,R,K,I nucleos;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;
+")
+```
+
+### Caso 2: Complementação da documentação durante o processo (mais comum)
+
+```{r, echo = FALSE}
+DiagrammeR("
+graph LR
+  id1(Interessado) ==>|Abre ou <br> complementa| A[SPUNet]
+  A ==>|Triagem| B(SPU-SC-NUDEPU)
+  A ==>|Documentação complementar| D
+  B ==> C{Caracterização <br> da Área}
+  C ==>|Área da <br> União| T[SPUViz]
+  T ==> D{Análise Técnica<br>Checklist}
+  C -->|Alodial| N(SPU-SC-NUGES)
+  T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  S --> D
+  T -->|Mudança de <br> Natureza| R[SPU-UC]
+  R -->|Encaminhar <br> como cessão!| B
+  R --> J
+  D ==>|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
+  D ==>|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
+  M ==>|Tramita| N
+  N ==>|Informa| id1
+  N -->|Cancela| A
+  A -->|Fim de prazo| N
+  N -->|Fim de prazo| P(SPU-SC-NUFIS)
+  P -->|Infração| Q[Autuação]
+  P -->|Sem infração| F
+  Q --> F
+  E ==>|Para Análise <br> Jurídica| I{CJU/SC}
+  I ==>|Parecer <br> Favorável| J[Portaria]
+  J ==>|Assinatura <br> Superintendente <br> ou Secretário| K[SPU-DEDES]
+  I -->|Parecer <br> Desfavorável| D
+  K ==>|DOU| N
+  N ==> L[FIGEST]
+  L ==> F[FIM!]
+  class B,N,P,S,R,K,I nucleos;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;
+")
+```
+
+
+### Caso 3: Desistência do interessado
+
+```{r, echo = FALSE}
+DiagrammeR("
+graph LR
+  id1(Interessado) ==>|Abre ou <br> complementa| A[SPUNet]
+  A ==>|Triagem| B(SPU-SC-NUDEPU)
+  B ==> C{Caracterização <br> da Área}
+  C ==>|Área da <br> União| T[SPUViz]
+  T ==> D{Análise Técnica<br>Checklist}
+  C -->|Alodial| N(SPU-SC-NUGES)
+  T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  S --> D
+  T -->|Mudança de <br> Natureza| R[SPU-UC]
+  R -->|Encaminhar <br> como cessão!| B
+  R --> J
+  D -->|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
+  D ==>|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
+  M ==>|Tramita| N
+  N ==>|Informa| id1
+  N -->|Cancela| A
+  A ==>|Fim de prazo| N
+  N ==>|Fim de prazo| P(SPU-SC-NUFIS)
+  P -->|Infração| Q[Autuação]
+  P ==>|Sem infração| F
+  Q --> F
+  E -->|Para Análise <br> Jurídica| I{CJU/SC}
+  I -->|Parecer <br> Favorável| J[Portaria]
+  J ==>|Assinatura <br> Superintendente <br> ou Secretário| K[SPU-DEDES]
+  I -->|Parecer <br> Desfavorável| D
+  K -->|DOU| N
+  N --> L[FIGEST]
+  L ==> F[FIM!]
+  class B,N,P,S,R,K,I nucleos;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;
+")
+```
+
+
+### Caso 3: Requerimento em área alodial
+
+```{r, echo = FALSE}
+DiagrammeR("
+graph LR
+  id1(Interessado) ==>|Abre ou <br> complementa| A[SPUNet]
+  A ==>|Triagem| B(SPU-SC-NUDEPU)
+  B ==> C{Caracterização <br> da Área}
   C -->|Área da <br> União| T[SPUViz]
   T --> D{Análise Técnica<br>Checklist}
-  C -->|Alodial| N(SPU-SC-NUGES)
+  C ==>|Alodial| N(SPU-SC-NUGES)
   T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
   T -->|Mudança de <br> Natureza| R[SPU-UC]
   R -->|Encaminhar <br> como cessão!| B
@@ -23,7 +153,8 @@ graph LR
   D -->|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
   D -->|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
   M -->|Tramita| N
-  N -->|Informa| id1
+  N ==>|Informa| id1
+  N ==>|Cancela| A
   A -->|Fim de prazo| N
   N -->|Fim de prazo| P(SPU-SC-NUFIS)
   P -->|Infração| Q[Autuação]
@@ -31,7 +162,7 @@ graph LR
   Q --> F
   E -->|Para Análise <br> Jurídica| I{CJU/SC}
   I -->|Parecer <br> Favorável| J[Portaria]
-  J -->|Assinatura <br> Superintendente ou <br> Secretário| K[SPU-DEDES]
+  J -->|Assinatura <br> Superintendente <br> ou Secretário| K[SPU-DEDES]
   I -->|Parecer <br> Desfavorável| D
   K -->|DOU| N
   N --> L[FIGEST]
@@ -45,6 +176,93 @@ graph LR
 ")
 ```
 
+### Caso 4: Com cancelamento de RIPs
+
+```{r, echo = FALSE}
+DiagrammeR("
+graph LR
+  id1(Interessado) ==>|Abre ou <br> complementa| A[SPUNet]
+  A ==>|Triagem| B(SPU-SC-NUDEPU)
+  B ==> C{Caracterização <br> da Área}
+  C ==>|Área da <br> União| T[SPUViz]
+  T ==> D{Análise Técnica<br>Checklist}
+  C -->|Alodial| N(SPU-SC-NUGES)
+  T ==>|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  S ==> D
+  T -->|Mudança de <br> Natureza| R[SPU-UC]
+  R -->|Encaminhar <br> como cessão!| B
+  R --> J
+  D ==>|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
+  D -->|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
+  M -->|Tramita| N
+  N -->|Informa| id1
+  N -->|Cancela| A
+  A -->|Fim de prazo| N
+  N -->|Fim de prazo| P(SPU-SC-NUFIS)
+  P -->|Infração| Q[Autuação]
+  P -->|Sem infração| F
+  Q --> F
+  E ==>|Para Análise <br> Jurídica| I{CJU/SC}
+  I ==>|Parecer <br> Favorável| J[Portaria]
+  J ==>|Assinatura <br> Superintendente <br> ou Secretário| K[SPU-DEDES]
+  I -->|Parecer <br> Desfavorável| D
+  K ==>|DOU| N
+  N ==> L[FIGEST]
+  L ==> F[FIM!]
+  class B,N,P,S,R,K,I nucleos;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;
+")
+```
+
+
+### Caso 5: Com mudança de natureza
+
+```{r, echo = FALSE}
+DiagrammeR("
+graph LR
+  id1(Interessado) ==>|Abre ou <br> complementa| A[SPUNet]
+  A ==>|Triagem| B(SPU-SC-NUDEPU)
+  B ==> C{Caracterização <br> da Área}
+  C ==>|Área da <br> União| T[SPUViz]
+  T --> D{Análise Técnica<br>Checklist}
+  C -->|Alodial| N(SPU-SC-NUGES)
+  T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  S --> D
+  T ==>|Mudança de <br> Natureza| R[SPU-UC]
+  R -->|Encaminhar <br> como cessão!| B
+  R ==> J
+  D -->|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
+  D -->|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
+  M -->|Tramita| N
+  N -->|Informa| id1
+  N -->|Cancela| A
+  A -->|Fim de prazo| N
+  N -->|Fim de prazo| P(SPU-SC-NUFIS)
+  P -->|Infração| Q[Autuação]
+  P -->|Sem infração| F
+  Q --> F
+  E -->|Para Análise <br> Jurídica| I{CJU/SC}
+  I -->|Parecer <br> Favorável| J[Portaria]
+  J ==>|Assinatura <br> Superintendente <br> ou Secretário| K[SPU-DEDES]
+  I -->|Parecer <br> Desfavorável| D
+  K ==>|DOU| N
+  N ==> L[FIGEST]
+  L ==> F[FIM!]
+  class B,N,P,S,R,K,I nucleos;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;
+")
+```
+
+
+### Geral
 
 ![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcbiAgaWQxKFtJbnRlcmVzc2Fkb10pIC0tPnxBYnJlIG91IDxicj4gY29tcGxlbWVudGF8IEFbU1BVTmV0XVxuICBBIC0tPnxUcmlhZ2VtfCBCKFNQVS1TQy1OVURFUFUpXG4gIEIgLS0-IEN7Q2FyYWN0ZXJpemHDp8OjbyA8YnI-IGRhIMOBcmVhfVxuICBDIC0tPnzDgXJlYSBkYSA8YnI-IFVuacOjb3wgVFsoU1BVVml6KV1cbiAgVCAtLT4gRHtBbsOhbGlzZSBUw6ljbmljYTxicj5DaGVja2xpc3R9XG4gIEMgLS0-fEFsb2RpYWx8IE4oU1BVLVNDLU5VR0VTKVxuICBUIC0tPnxEZXNhcHJvcHJpYcOnw7VlcyBlL291IDxicj4gY2FuY2VsYW1lbnRvIGRlIFJJUHM_fCBTKFNQVS1TQy1OVVBSSVYpXG4gIFQgLS0-fE11ZGFuw6dhIGRlIDxicj4gTmF0dXJlemF8IFJbU1BVLVVDXVxuICBSIC0tPnxFbmNhbWluaGFyIDxicj4gY29tbyBjZXNzw6NvIXwgQlxuICBSIC0tPiBKXG4gIEQgLS0-fERvY3VtZW50YcOnw6NvIE9LIXwgRVtFbGFib3JhciBOVCBlIDxicj4gTWludXRhIGRlIFBvcnRhcmlhXVxuICBEIC0tPnxEb2N1bWVudGHDp8OjbyA8YnI-IGluY29tcGxldGEhfCBNW0VsYWJvcmFyIDxicj4gTm90aWZpY2HDp8Ojb11cbiAgTSAtLT58VHJhbWl0YXwgTlxuICBOIC0tPnxJbmZvcm1hfCBpZDFcbiAgQSAtLT58RmltIGRlIHByYXpvfCBOXG4gIE4gLS0-fEZpbSBkZSBwcmF6b3wgUChTUFUtU0MtTlVGSVMpXG4gIFAgLS0-fEluZnJhw6fDo298IFFbQXV0dWHDp8Ojb11cbiAgUCAtLT58U2VtIGluZnJhw6fDo298IEZcbiAgUSAtLT4gRlxuICBFIC0tPnxQYXJhIEFuw6FsaXNlIDxicj4gSnVyw61kaWNhfCBJe0NKVS9TQ31cbiAgSSAtLT58UGFyZWNlciA8YnI-IEZhdm9yw6F2ZWx8IEpbUG9ydGFyaWFdXG4gIEogLS0-fEFzc2luYXR1cmEgPGJyPiBTdXBlcmludGVuZGVudGUgb3UgPGJyPiBTZWNyZXTDoXJpb3wgS1tTUFUtREVERVNdXG4gIEkgLS0-fFBhcmVjZXIgPGJyPiBEZXNmYXZvcsOhdmVsfCBEXG4gIEsgLS0-fERPVXwgTlxuICBOIC0tPiBMW0ZJR0VTVF1cbiAgTCAtLT4gRltGSU0hXVxuICBjbGFzcyBCLE4sUCxTLFIsSyxJIG51Y2xlb3M7XG4gIGNsYXNzRGVmIG51Y2xlb3MgZmlsbDojZjk2LGNvbG9yOiNmZmY7XG4gIGNsYXNzIGlkMSBpbnRlcjtcbiAgY2xhc3NEZWYgaW50ZXIgZmlsbDojZTZmZjk3O1xuICBjbGFzcyBGIGZpbTtcbiAgY2xhc3NEZWYgZmltIGZpbGw6cmVkLGNvbG9yOiNmZmY7IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQiLCJ0aGVtZVZhcmlhYmxlcyI6eyJiYWNrZ3JvdW5kIjoid2hpdGUiLCJwcmltYXJ5Q29sb3IiOiIjRUNFQ0ZGIiwic2Vjb25kYXJ5Q29sb3IiOiIjZmZmZmRlIiwidGVydGlhcnlDb2xvciI6ImhzbCg4MCwgMTAwJSwgOTYuMjc0NTA5ODAzOSUpIiwicHJpbWFyeUJvcmRlckNvbG9yIjoiaHNsKDI0MCwgNjAlLCA4Ni4yNzQ1MDk4MDM5JSkiLCJzZWNvbmRhcnlCb3JkZXJDb2xvciI6ImhzbCg2MCwgNjAlLCA4My41Mjk0MTE3NjQ3JSkiLCJ0ZXJ0aWFyeUJvcmRlckNvbG9yIjoiaHNsKDgwLCA2MCUsIDg2LjI3NDUwOTgwMzklKSIsInByaW1hcnlUZXh0Q29sb3IiOiIjMTMxMzAwIiwic2Vjb25kYXJ5VGV4dENvbG9yIjoiIzAwMDAyMSIsInRlcnRpYXJ5VGV4dENvbG9yIjoicmdiKDkuNTAwMDAwMDAwMSwgOS41MDAwMDAwMDAxLCA5LjUwMDAwMDAwMDEpIiwibGluZUNvbG9yIjoiIzMzMzMzMyIsInRleHRDb2xvciI6IiMzMzMiLCJtYWluQmtnIjoiI0VDRUNGRiIsInNlY29uZEJrZyI6IiNmZmZmZGUiLCJib3JkZXIxIjoiIzkzNzBEQiIsImJvcmRlcjIiOiIjYWFhYTMzIiwiYXJyb3doZWFkQ29sb3IiOiIjMzMzMzMzIiwiZm9udEZhbWlseSI6IlwidHJlYnVjaGV0IG1zXCIsIHZlcmRhbmEsIGFyaWFsIiwiZm9udFNpemUiOiIxNnB4IiwibGFiZWxCYWNrZ3JvdW5kIjoiI2U4ZThlOCIsIm5vZGVCa2ciOiIjRUNFQ0ZGIiwibm9kZUJvcmRlciI6IiM5MzcwREIiLCJjbHVzdGVyQmtnIjoiI2ZmZmZkZSIsImNsdXN0ZXJCb3JkZXIiOiIjYWFhYTMzIiwiZGVmYXVsdExpbmtDb2xvciI6IiMzMzMzMzMiLCJ0aXRsZUNvbG9yIjoiIzMzMyIsImVkZ2VMYWJlbEJhY2tncm91bmQiOiIjZThlOGU4IiwiYWN0b3JCb3JkZXIiOiJoc2woMjU5LjYyNjE2ODIyNDMsIDU5Ljc3NjUzNjMxMjglLCA4Ny45MDE5NjA3ODQzJSkiLCJhY3RvckJrZyI6IiNFQ0VDRkYiLCJhY3RvclRleHRDb2xvciI6ImJsYWNrIiwiYWN0b3JMaW5lQ29sb3IiOiJncmV5Iiwic2lnbmFsQ29sb3IiOiIjMzMzIiwic2lnbmFsVGV4dENvbG9yIjoiIzMzMyIsImxhYmVsQm94QmtnQ29sb3IiOiIjRUNFQ0ZGIiwibGFiZWxCb3hCb3JkZXJDb2xvciI6ImhzbCgyNTkuNjI2MTY4MjI0MywgNTkuNzc2NTM2MzEyOCUsIDg3LjkwMTk2MDc4NDMlKSIsImxhYmVsVGV4dENvbG9yIjoiYmxhY2siLCJsb29wVGV4dENvbG9yIjoiYmxhY2siLCJub3RlQm9yZGVyQ29sb3IiOiIjYWFhYTMzIiwibm90ZUJrZ0NvbG9yIjoiI2ZmZjVhZCIsIm5vdGVUZXh0Q29sb3IiOiJibGFjayIsImFjdGl2YXRpb25Cb3JkZXJDb2xvciI6IiM2NjYiLCJhY3RpdmF0aW9uQmtnQ29sb3IiOiIjZjRmNGY0Iiwic2VxdWVuY2VOdW1iZXJDb2xvciI6IndoaXRlIiwic2VjdGlvbkJrZ0NvbG9yIjoicmdiYSgxMDIsIDEwMiwgMjU1LCAwLjQ5KSIsImFsdFNlY3Rpb25Ca2dDb2xvciI6IndoaXRlIiwic2VjdGlvbkJrZ0NvbG9yMiI6IiNmZmY0MDAiLCJ0YXNrQm9yZGVyQ29sb3IiOiIjNTM0ZmJjIiwidGFza0JrZ0NvbG9yIjoiIzhhOTBkZCIsInRhc2tUZXh0TGlnaHRDb2xvciI6IndoaXRlIiwidGFza1RleHRDb2xvciI6IndoaXRlIiwidGFza1RleHREYXJrQ29sb3IiOiJibGFjayIsInRhc2tUZXh0T3V0c2lkZUNvbG9yIjoiYmxhY2siLCJ0YXNrVGV4dENsaWNrYWJsZUNvbG9yIjoiIzAwMzE2MyIsImFjdGl2ZVRhc2tCb3JkZXJDb2xvciI6IiM1MzRmYmMiLCJhY3RpdmVUYXNrQmtnQ29sb3IiOiIjYmZjN2ZmIiwiZ3JpZENvbG9yIjoibGlnaHRncmV5IiwiZG9uZVRhc2tCa2dDb2xvciI6ImxpZ2h0Z3JleSIsImRvbmVUYXNrQm9yZGVyQ29sb3IiOiJncmV5IiwiY3JpdEJvcmRlckNvbG9yIjoiI2ZmODg4OCIsImNyaXRCa2dDb2xvciI6InJlZCIsInRvZGF5TGluZUNvbG9yIjoicmVkIiwibGFiZWxDb2xvciI6ImJsYWNrIiwiZXJyb3JCa2dDb2xvciI6IiM1NTIyMjIiLCJlcnJvclRleHRDb2xvciI6IiM1NTIyMjIiLCJjbGFzc1RleHQiOiIjMTMxMzAwIiwiZmlsbFR5cGUwIjoiI0VDRUNGRiIsImZpbGxUeXBlMSI6IiNmZmZmZGUiLCJmaWxsVHlwZTIiOiJoc2woMzA0LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTMiOiJoc2woMTI0LCAxMDAlLCA5My41Mjk0MTE3NjQ3JSkiLCJmaWxsVHlwZTQiOiJoc2woMTc2LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTUiOiJoc2woLTQsIDEwMCUsIDkzLjUyOTQxMTc2NDclKSIsImZpbGxUeXBlNiI6ImhzbCg4LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTciOiJoc2woMTg4LCAxMDAlLCA5My41Mjk0MTE3NjQ3JSkifX0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)
 
