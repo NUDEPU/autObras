@@ -9,6 +9,11 @@ library(DiagrammeR)
 
 ### Caso 1: Requerimento com documentação completa
 
+Num cenário ideal, onde o requerimento fosse feito pelo interessado já com a 
+documentação completa necessária para a análise, o andamento do processo se 
+daria conforme o encaminhamento dado pelas linhas mais grossas no fluxograma
+abaixo:
+
 ```{r, echo = FALSE}
 DiagrammeR("
 graph LR
@@ -49,6 +54,17 @@ graph LR
 ```
 
 ### Caso 2: Complementação da documentação durante o processo (mais comum)
+
+Como o formulário de requerimento ainda não é o ideal, usualmente o requerimento
+é feito pelo interessado sem que toda a documentação seja anexada de início.
+Desta forma, é mais comum que o andamento de um processo de autorizaçã de obras
+se dê conforme representado pelas linhas mais grossas no fluxograma abaixo, onde
+após a elaboração de *checklist* pelo **SPU-SC-NUDEPU** é necessário notificar
+o interessado para que complemente a documentação inicial apresentada, o que é
+feito pelo **SPU-SC-NUGES**. Uma vez que o interessado complementa a documentação, 
+um novo *checklist* é elaborado pela **SPU-SC-NUDEPU**. Se a documentação for
+suficiente, o processo segue o trâmite normal, como no caso anterior, até a 
+publicação da portaria.
 
 ```{r, echo = FALSE}
 DiagrammeR("
@@ -91,8 +107,13 @@ graph LR
 ")
 ```
 
-
 ### Caso 3: Desistência do interessado
+
+Em alguns casos, após a detecção da insuficiência da documentação necessária para
+o seguimento do processo, o interessado é notificado, porém este não apresenta
+qualquer resposta. Após a notificação do interessado a **SPU-SC-NUGES** aguarda
+o prazo legal e, na ausência de resposta, cancela o requerimento no SPUNET, por
+falta de documentação necessária.
 
 ```{r, echo = FALSE}
 DiagrammeR("
@@ -134,8 +155,14 @@ graph LR
 ")
 ```
 
-
 ### Caso 3: Requerimento em área alodial
+
+Em um pequeno número de casos ocorre do interessado, imaginando que sua obra 
+pretendida estar localizada sobre imóvel da União entra com um pedido, o que 
+depois não se verifica. Desta forma, uma vez que a caracterização da área é 
+realizada pela **SPU-SC-NUDEPU** e é constatada que a obra se encontra sobre
+terreno alodial, esta informa ao **SPU-SC-NUGES**, que informa o interessado e
+cancela o requerimento no SPUNET.
 
 ```{r, echo = FALSE}
 DiagrammeR("
@@ -176,7 +203,12 @@ graph LR
 ")
 ```
 
-### Caso 4: Com cancelamento de RIPs
+### Caso 4: Com cancelamento de RIP's
+
+Em alguns casos a obra pretendida requer a desapropriação de imóveis e o 
+cancelamento de ocupações regulares. Quando isto ocorre, é necessário que,
+além da análise padrão, que o processo seja tramitado ao **SPU-SC-NUPRIV** para
+que providencia o cancelamento dos RIP's.
 
 ```{r, echo = FALSE}
 DiagrammeR("
@@ -218,8 +250,14 @@ graph LR
 ")
 ```
 
-
 ### Caso 5: Com mudança de natureza
+
+Pode ocorrer que, em virtude das necessidades da obra, tenham que ser realizados
+aterros e escavações de maneira que a natureza dos imóveis da União seja 
+modificada. Em tais situações, o processo deve tramitar para a **SPU-SC**, que
+decidirá se o processo deverá seguir pela Superintendência na forma de cessão ou
+se deverá ser feita a autorização da obra, porém com a assinatura do Secretário
+do Patrimônio da União, por previsão legal.
 
 ```{r, echo = FALSE}
 DiagrammeR("
