@@ -11,13 +11,14 @@ library(DiagrammeR)
 DiagrammeR("
 graph LR
   A[Abertura do <br> Requerimento] -->|Triagem| B(SPU-SC-NUDEPU)
-  B --> C{<center>Caracterização <br> da Área</center>}
-  C -->|Área da União| D{<center>Análise Técnica<br><i>Checklist</i></center>}
+  B --> C{Caracterização <br> da Área}
+  C -->|Área da União| T(SPUViz)
+  T --> D{Análise Técnica<br>Checklist}
   C -->|Alodial| N(SPU-SC-NUGES)
-  C -->|Mudança de Natureza| R[<center>SPU-UC ou <br> Encaminhar como Cessão</center>]
+  T -->|Mudança de Natureza| R[SPU-UC ou <br> Encaminhar como Cessão]
   D -->|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
   D -->|Documentação incompleta!| M[Elaborar Notificação]
-  C -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
   M -->|Tramitação| N
   N -->|Informar| O{Interessado}
   O -->|Ausência de resposta| P(SPU-SC-NUFIS)
@@ -31,6 +32,8 @@ graph LR
   I -->|Desfavorável| D
   K -->|DOU| L[FIGEST]
   L --> F[FIM!]
+  class B,N,P,S nucleos;
+  classDef nucleos fill:#f96;
 ")
 ```
 
