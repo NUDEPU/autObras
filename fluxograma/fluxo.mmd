@@ -1,22 +1,30 @@
-graph LR
-  A[Abertura do <br> Requerimento] -->|Triagem| B(SPU-SC-NUDEPU)
-  B --> C{<center>Caracterização <br> da Área</center>}
-  C -->|Área da União| D{<center>Análise Técnica<br><i>Checklist</i></center>}
+graph TD
+  id1[Interessado] -->|Abre ou <br> complementa| A[SPUNet]
+  A -->|Triagem| B(SPU-SC-NUDEPU)
+  B --> C{Caracterização <br> da Área}
+  C -->|Área da <br> União| T(SPUViz)
+  T --> D{Análise Técnica<br>Checklist}
   C -->|Alodial| N(SPU-SC-NUGES)
-  C -->|Mudança de Natureza| R[<center>SPU-UC ou <br> Encaminhar como Cessão</center>]
+  T -->|Mudança de <br> Natureza| R[SPU-UC ou <br> Encaminhar como Cessão]
   D -->|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
-  D -->|Documentação incompleta!| M[Elaborar Notificação]
-  C -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
-  M -->|Tramitação| N
-  N -->|Informar| O{Interessado}
-  O -->|Ausência de resposta| P(SPU-SC-NUFIS)
-  O -->|Resposta| A
+  D -->|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
+  T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
+  M -->|Tramita| N
+  N -->|Informa| id1
+  A -->|Fim de prazo| N
+  N -->|Fim de prazo| P(SPU-SC-NUFIS)
   P -->|Infração| Q[Autuação]
   P -->|Sem infração| F
   Q --> F
   E -->|PARA CJU/SC| I{Parecer Jurídico}
   I -->|Favorável| J[Portaria]
-  J -->|Assinatura do Superintendente| K[DEDES]
+  J -->|Assinatura <br> Superintendente| K[DEDES]
   I -->|Desfavorável| D
   K -->|DOU| L[FIGEST]
   L --> F[FIM!]
+  class B,N,P,S nucleos;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;

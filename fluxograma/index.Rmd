@@ -7,34 +7,42 @@ output: html_document
 library(DiagrammeR)
 ```
 
-```{r fluxo, echo = FALSE}
+```{r, echo = TRUE}
 DiagrammeR("
 graph LR
-  A[Abertura do <br> Requerimento] -->|Triagem| B(SPU-SC-NUDEPU)
+  id1[Interessado] -->|Abre ou <br> complementa| A[SPUNet]
+  A -->|Triagem| B(SPU-SC-NUDEPU)
   B --> C{Caracterização <br> da Área}
-  C -->|Área da União| T(SPUViz)
+  C -->|Área da <br> União| T(SPUViz)
   T --> D{Análise Técnica<br>Checklist}
   C -->|Alodial| N(SPU-SC-NUGES)
-  T -->|Mudança de Natureza| R[SPU-UC ou <br> Encaminhar como Cessão]
+  T -->|Mudança de <br> Natureza| R[SPU-UC ou <br> Encaminhar como Cessão]
   D -->|Documentação OK!| E[Elaborar NT e <br> Minuta de Portaria]
-  D -->|Documentação incompleta!| M[Elaborar Notificação]
+  D -->|Documentação <br> incompleta!| M[Elaborar <br> Notificação]
   T -->|Desapropriações e/ou <br> cancelamento de RIPs?| S(SPU-SC-NUPRIV)
-  M -->|Tramitação| N
-  N -->|Informar| O{Interessado}
-  O -->|Ausência de resposta| P(SPU-SC-NUFIS)
-  O -->|Resposta| A
+  M -->|Tramita| N
+  N -->|Informa| id1
+  A -->|Fim de prazo| N
+  N -->|Fim de prazo| P(SPU-SC-NUFIS)
   P -->|Infração| Q[Autuação]
   P -->|Sem infração| F
   Q --> F
   E -->|PARA CJU/SC| I{Parecer Jurídico}
   I -->|Favorável| J[Portaria]
-  J -->|Assinatura do Superintendente| K[DEDES]
+  J -->|Assinatura <br> Superintendente| K[DEDES]
   I -->|Desfavorável| D
   K -->|DOU| L[FIGEST]
   L --> F[FIM!]
   class B,N,P,S nucleos;
-  classDef nucleos fill:#f96;
+  classDef nucleos fill:#f96,color:#fff;
+  class id1 inter;
+  classDef inter fill:#e6ff97;
+  class F fim;
+  classDef fim fill:red,color:#fff;
 ")
 ```
+
+
+![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcbiAgaWQxKFtJbnRlcmVzc2Fkb10pIC0tPnxBYnJlIG91IDxicj4gY29tcGxlbWVudGF8IEFbU1BVTmV0XVxuICBBIC0tPnxUcmlhZ2VtfCBCKFNQVS1TQy1OVURFUFUpXG4gIEIgLS0-IEN7Q2FyYWN0ZXJpemHDp8OjbyA8YnI-IGRhIMOBcmVhfVxuICBDIC0tPnzDgXJlYSBkYSA8YnI-IFVuacOjb3wgVFsoU1BVVml6KV1cbiAgVCAtLT4gRHtBbsOhbGlzZSBUw6ljbmljYTxicj5DaGVja2xpc3R9XG4gIEMgLS0-fEFsb2RpYWx8IE4oU1BVLVNDLU5VR0VTKVxuICBUIC0tPnxNdWRhbsOnYSBkZSA8YnI-IE5hdHVyZXphfCBSW1NQVS1VQyBvdSA8YnI-IEVuY2FtaW5oYXIgY29tbyBDZXNzw6NvXVxuICBEIC0tPnxEb2N1bWVudGHDp8OjbyBPSyF8IEVbRWxhYm9yYXIgTlQgZSA8YnI-IE1pbnV0YSBkZSBQb3J0YXJpYV1cbiAgRCAtLT58RG9jdW1lbnRhw6fDo28gPGJyPiBpbmNvbXBsZXRhIXwgTVtFbGFib3JhciA8YnI-IE5vdGlmaWNhw6fDo29dXG4gIFQgLS0-fERlc2Fwcm9wcmlhw6fDtWVzIGUvb3UgPGJyPiBjYW5jZWxhbWVudG8gZGUgUklQcz98IFMoU1BVLVNDLU5VUFJJVilcbiAgTSAtLT58VHJhbWl0YXwgTlxuICBOIC0tPnxJbmZvcm1hfCBpZDFcbiAgQSAtLT58RmltIGRlIHByYXpvfCBOXG4gIE4gLS0-fEZpbSBkZSBwcmF6b3wgUChTUFUtU0MtTlVGSVMpXG4gIFAgLS0-fEluZnJhw6fDo298IFFbQXV0dWHDp8Ojb11cbiAgUCAtLT58U2VtIGluZnJhw6fDo298IEZcbiAgUSAtLT4gRlxuICBFIC0tPnxQQVJBIENKVS9TQ3wgSXtQYXJlY2VyIEp1csOtZGljb31cbiAgSSAtLT58RmF2b3LDoXZlbHwgSltQb3J0YXJpYV1cbiAgSiAtLT58QXNzaW5hdHVyYSA8YnI-IFN1cGVyaW50ZW5kZW50ZXwgS1tERURFU11cbiAgSSAtLT58RGVzZmF2b3LDoXZlbHwgRFxuICBLIC0tPnxET1V8IExbRklHRVNUXVxuICBMIC0tPiBGW0ZJTSFdXG4gIGNsYXNzIEIsTixQLFMgbnVjbGVvcztcbiAgY2xhc3NEZWYgbnVjbGVvcyBmaWxsOiNmOTYsY29sb3I6I2ZmZjtcbiAgY2xhc3MgaWQxIGludGVyO1xuICBjbGFzc0RlZiBpbnRlciBmaWxsOiNlNmZmOTc7XG4gIGNsYXNzIEYgZmltO1xuICBjbGFzc0RlZiBmaW0gZmlsbDpyZWQsY29sb3I6I2ZmZjsiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCIsInRoZW1lVmFyaWFibGVzIjp7ImJhY2tncm91bmQiOiJ3aGl0ZSIsInByaW1hcnlDb2xvciI6IiNFQ0VDRkYiLCJzZWNvbmRhcnlDb2xvciI6IiNmZmZmZGUiLCJ0ZXJ0aWFyeUNvbG9yIjoiaHNsKDgwLCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJwcmltYXJ5Qm9yZGVyQ29sb3IiOiJoc2woMjQwLCA2MCUsIDg2LjI3NDUwOTgwMzklKSIsInNlY29uZGFyeUJvcmRlckNvbG9yIjoiaHNsKDYwLCA2MCUsIDgzLjUyOTQxMTc2NDclKSIsInRlcnRpYXJ5Qm9yZGVyQ29sb3IiOiJoc2woODAsIDYwJSwgODYuMjc0NTA5ODAzOSUpIiwicHJpbWFyeVRleHRDb2xvciI6IiMxMzEzMDAiLCJzZWNvbmRhcnlUZXh0Q29sb3IiOiIjMDAwMDIxIiwidGVydGlhcnlUZXh0Q29sb3IiOiJyZ2IoOS41MDAwMDAwMDAxLCA5LjUwMDAwMDAwMDEsIDkuNTAwMDAwMDAwMSkiLCJsaW5lQ29sb3IiOiIjMzMzMzMzIiwidGV4dENvbG9yIjoiIzMzMyIsIm1haW5Ca2ciOiIjRUNFQ0ZGIiwic2Vjb25kQmtnIjoiI2ZmZmZkZSIsImJvcmRlcjEiOiIjOTM3MERCIiwiYm9yZGVyMiI6IiNhYWFhMzMiLCJhcnJvd2hlYWRDb2xvciI6IiMzMzMzMzMiLCJmb250RmFtaWx5IjoiXCJ0cmVidWNoZXQgbXNcIiwgdmVyZGFuYSwgYXJpYWwiLCJmb250U2l6ZSI6IjE2cHgiLCJsYWJlbEJhY2tncm91bmQiOiIjZThlOGU4Iiwibm9kZUJrZyI6IiNFQ0VDRkYiLCJub2RlQm9yZGVyIjoiIzkzNzBEQiIsImNsdXN0ZXJCa2ciOiIjZmZmZmRlIiwiY2x1c3RlckJvcmRlciI6IiNhYWFhMzMiLCJkZWZhdWx0TGlua0NvbG9yIjoiIzMzMzMzMyIsInRpdGxlQ29sb3IiOiIjMzMzIiwiZWRnZUxhYmVsQmFja2dyb3VuZCI6IiNlOGU4ZTgiLCJhY3RvckJvcmRlciI6ImhzbCgyNTkuNjI2MTY4MjI0MywgNTkuNzc2NTM2MzEyOCUsIDg3LjkwMTk2MDc4NDMlKSIsImFjdG9yQmtnIjoiI0VDRUNGRiIsImFjdG9yVGV4dENvbG9yIjoiYmxhY2siLCJhY3RvckxpbmVDb2xvciI6ImdyZXkiLCJzaWduYWxDb2xvciI6IiMzMzMiLCJzaWduYWxUZXh0Q29sb3IiOiIjMzMzIiwibGFiZWxCb3hCa2dDb2xvciI6IiNFQ0VDRkYiLCJsYWJlbEJveEJvcmRlckNvbG9yIjoiaHNsKDI1OS42MjYxNjgyMjQzLCA1OS43NzY1MzYzMTI4JSwgODcuOTAxOTYwNzg0MyUpIiwibGFiZWxUZXh0Q29sb3IiOiJibGFjayIsImxvb3BUZXh0Q29sb3IiOiJibGFjayIsIm5vdGVCb3JkZXJDb2xvciI6IiNhYWFhMzMiLCJub3RlQmtnQ29sb3IiOiIjZmZmNWFkIiwibm90ZVRleHRDb2xvciI6ImJsYWNrIiwiYWN0aXZhdGlvbkJvcmRlckNvbG9yIjoiIzY2NiIsImFjdGl2YXRpb25Ca2dDb2xvciI6IiNmNGY0ZjQiLCJzZXF1ZW5jZU51bWJlckNvbG9yIjoid2hpdGUiLCJzZWN0aW9uQmtnQ29sb3IiOiJyZ2JhKDEwMiwgMTAyLCAyNTUsIDAuNDkpIiwiYWx0U2VjdGlvbkJrZ0NvbG9yIjoid2hpdGUiLCJzZWN0aW9uQmtnQ29sb3IyIjoiI2ZmZjQwMCIsInRhc2tCb3JkZXJDb2xvciI6IiM1MzRmYmMiLCJ0YXNrQmtnQ29sb3IiOiIjOGE5MGRkIiwidGFza1RleHRMaWdodENvbG9yIjoid2hpdGUiLCJ0YXNrVGV4dENvbG9yIjoid2hpdGUiLCJ0YXNrVGV4dERhcmtDb2xvciI6ImJsYWNrIiwidGFza1RleHRPdXRzaWRlQ29sb3IiOiJibGFjayIsInRhc2tUZXh0Q2xpY2thYmxlQ29sb3IiOiIjMDAzMTYzIiwiYWN0aXZlVGFza0JvcmRlckNvbG9yIjoiIzUzNGZiYyIsImFjdGl2ZVRhc2tCa2dDb2xvciI6IiNiZmM3ZmYiLCJncmlkQ29sb3IiOiJsaWdodGdyZXkiLCJkb25lVGFza0JrZ0NvbG9yIjoibGlnaHRncmV5IiwiZG9uZVRhc2tCb3JkZXJDb2xvciI6ImdyZXkiLCJjcml0Qm9yZGVyQ29sb3IiOiIjZmY4ODg4IiwiY3JpdEJrZ0NvbG9yIjoicmVkIiwidG9kYXlMaW5lQ29sb3IiOiJyZWQiLCJsYWJlbENvbG9yIjoiYmxhY2siLCJlcnJvckJrZ0NvbG9yIjoiIzU1MjIyMiIsImVycm9yVGV4dENvbG9yIjoiIzU1MjIyMiIsImNsYXNzVGV4dCI6IiMxMzEzMDAiLCJmaWxsVHlwZTAiOiIjRUNFQ0ZGIiwiZmlsbFR5cGUxIjoiI2ZmZmZkZSIsImZpbGxUeXBlMiI6ImhzbCgzMDQsIDEwMCUsIDk2LjI3NDUwOTgwMzklKSIsImZpbGxUeXBlMyI6ImhzbCgxMjQsIDEwMCUsIDkzLjUyOTQxMTc2NDclKSIsImZpbGxUeXBlNCI6ImhzbCgxNzYsIDEwMCUsIDk2LjI3NDUwOTgwMzklKSIsImZpbGxUeXBlNSI6ImhzbCgtNCwgMTAwJSwgOTMuNTI5NDExNzY0NyUpIiwiZmlsbFR5cGU2IjoiaHNsKDgsIDEwMCUsIDk2LjI3NDUwOTgwMzklKSIsImZpbGxUeXBlNyI6ImhzbCgxODgsIDEwMCUsIDkzLjUyOTQxMTc2NDclKSJ9fSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
 
 [Fluxograma Marina](fluxogramaAutObras.pdf)
